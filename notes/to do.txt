@@ -1,0 +1,78 @@
+
+ MODES OF OPERATION
+ ------------------------------------------------------------------------------------------------------
+
+ 1 Morphing aliens
+
+ 2 Cellular Automata
+
+ 3 Binary timer (16fps for fade effect per seccond)
+
+ 4 Cylon fader
+
+ 5 Obstacle On The Fly (madre de dios! :-)
+
+
+
+ MODE VALUES (program variable)
+ ------------------------------------------------------------------------------------------------------
+ 000x xxxx: wait for selection
+
+ 001x xxxx: alien morphing 
+
+ 010x xxxx: game of life
+
+ 011x xxxx: binary timer
+
+ 100x xxxx: cylon fader
+
+
+
+
+
+ Subroutines to be written		Status
+ ------------------------------------------------------------------------------------------------------
+
+ * define third buffer			done
+
+ * Load from flash memory		done
+
+ * pixel fade in/out			done
+
+ * pixel morphing 			done
+
+ * keypad escape function (all modes)	pending
+
+ * keypad reset function (game of life)	pending
+
+ * keypad select function (menu)	pending
+
+ * random number generation		done
+
+ * game of life (initial population)	almost
+
+ * game of life (next generation)	pending
+
+
+
+
+
+ Notes on Cellular Automata
+ ------------------------------------------------------------------------------------------------------
+
+ - "Game of life" rules:
+   1 Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+   2 Any live cell with more than three live neighbours dies, as if by overcrowding.
+   3 Any live cell with two or three live neighbours lives on to the next generation.
+   4 Any dead cell with exactly three live neighbours becomes a live cell.
+
+ - "Langtons Ant" rules:
+   1 At a white square, turn 90° right, flip the color of the square, move forward one unit.
+   2 At a black square, turn 90° left, flip the color of the square, move forward one unit.
+
+   http://en.wikipedia.org/wiki/Langton's_ant
+
+
+ - "Seed" rules:
+   1 A cell turns on if it was off but had exactly two neighbors that were on.
+   2 All other cells turn off.

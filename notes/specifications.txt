@@ -1,0 +1,98 @@
+
+-----------------------------------------------------------------------------
+ 4bit resolution MIBAM
+-----------------------------------------------------------------------------
+
+ MIBAM = Mirrored Image BAM
+
+ MIBAM cycle = 2 BAM cycles
+
+ # first BAM cycle:
+   1st bit duration 10ìs	  80ticks @ 8MHz	1/8pre: OCR0A=10
+   2nd bit duration 20ìs	 160ticks @ 8MHz	1/8pre: OCR0A=20
+   3rd bit duration 40ìs	 320ticks @ 8MHz	1/8pre: OCR0A=40
+   4th bit duration 80ìs	 640ticks @ 8MHz	1/8pre: OCR0A=80
+   total duration 150ìs
+
+ # second BAM cycle:
+   4th bit duration 80ìs
+   3rd bit duration 40ìs
+   2nd bit duration 20ìs
+   1st bit duration 10ìs
+   total duration 150ìs
+
+ MIBAM cycle duration: 2 x 150ìs = 300ìs = 0.3ms
+
+ 4 interrupts per BAM cycle
+ 8 interrupts per MIBAM cycle
+
+-----------------------------------------------------------------------------
+ matrix timing
+-----------------------------------------------------------------------------
+
+ theoretical time for each line		: 0.3ms
+
+ theoretical time for each frame	: 2.4ms
+
+ practical time for each frame		: 20062ticks => 2507.75ìs @ 8MHz
+
+ delay between frame redrawing		: 35 x 1024 = 35840ticks => 4480ìs @ 8MHz
+
+ total time until frame refreshed	: 2507.75ìs + 4480ìs = 6987.75ìs = 6.98775ms
+
+ refresh rate		 		: 143.1 (~143)Hz
+
+-----------------------------------------------------------------------------
+ data organization
+-----------------------------------------------------------------------------
+
+ each pixel requires	4 bits
+
+ each line requires	8 x 4 = 32 bits or 4 bytes
+
+ frame requires 	8 x 32 = 256 bits or 32 bytes
+
+ two frame buffers	2 x 32 = 64 bytes
+
+ in each frame buffer:
+
+  dword 1	data for line 1 (topmost)
+  dword 2	data for line 2
+  dword 3	data for line 3
+  dword 4	data for line 4
+  dword 5	data for line 5
+  dword 6	data for line 6
+  dword 7	data for line 7
+  dword 8	data for line 8 (lowermost)
+
+ most significant bit-quadruple in each word -> first column (left side)
+ ...
+ ...
+ ...
+ least significant bit-quadruple in each word -> last column (right side)
+
+-----------------------------------------------------------------------------
+ pin connections
+-----------------------------------------------------------------------------
+
+ matrix pin          mcu pin
+ ============================
+ line 1 (9)          PB0 (12)
+ line 2 (14)         PB5 (17)
+ line 3 (8)          PD5 (9)
+ line 4 (12)         PB3 (15)
+ line 5 (1)          PD0 (2)
+ line 6 (7)          PD4 (8)
+ line 7 (2)          PD1 (3)
+ line 8 (5)          PD2 (6)
+
+ col 1 (13)          PB4 (21)
+ col 2 (3)           PA1 (4)
+ col 3 (4)           PA0 (5)
+ col 4 (10)          PB1 (13)
+ col 5 (6)           PD3 (7)
+ col 6 (11)          PB2 (14)
+ col 7 (15)          PB6 (18)
+ col 8 (16)          PB7 (19)
+
+

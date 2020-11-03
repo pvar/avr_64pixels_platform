@@ -1,0 +1,29 @@
+
+-------------------------------------------------------
+
+lm_scan.asm
+	* scan_frame		isr timer coutner overflow
+	* bam_step			isr timer counter match a
+	* mab_step			isr timer counter match b
+	* mibam
+	* bit_1/2/3/4		transform buffer data to port data
+	* col_reset			reset port data registers, so that all columns are deactivated
+	* data_out			output new port data
+
+btn_ctrl.asm
+	* button_act		take action for buttons pressed
+	* check_buttons		enable buttons, check if pressed and deactivate
+
+buffers.asm
+	* clr_bf			clear all buffers (primary and secondary)
+	* sec2pri			copy data from secondary to primary frame buffer
+	* flash2ram			copy data from flash memory to ram (secondary or tertiary buffer)
+	* morphing_bf		create new buffer (secondary) from approximation of primary's to tertiary's data
+
+pixels.asm
+	* morphing			pixel morphing (gradual approxiamtion of a value)
+	* rnd_pixels		random pixel generator
+	* rw_pixel_data		read/write pixel data from coordinates
+
+renderer.asm
+	* render			render new image in secondary buffer according to mode of operation
